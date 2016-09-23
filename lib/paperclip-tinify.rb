@@ -3,7 +3,7 @@ module Paperclip
 
   class Tinify < Processor
     class << self
-      attr_accessor :tinify_key
+      attr_accessor :tinify_key, :environments
     end
 
     def make
@@ -16,6 +16,10 @@ module Paperclip
 
     private
 
+    def environments
+      Tinify.environments || [:production]
+    end
+
     def first_processor?
       @first_processor ||= @file.is_a?(Paperclip::AbstractAdapter)
     end
@@ -26,6 +30,12 @@ module Paperclip
 
     def compress
       src_path = File.expand_path(@file.path)
+
+      unless environments.include? RailsEnvironment.get.to_sym
+        Paperclip.log "tinify ignores this environment, skipping..."
+
+        return File.open(src_path)
+      end
 
       if api_key = Tinify.tinify_key
         Paperclip.log "tinifying #{src_path}"
