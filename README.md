@@ -16,6 +16,12 @@ Configure your API key in config/initializers/paperclip.rb:
 Paperclip::Tinify.tinify_key = 'YOUR_API_KEY'
 ````
 
+By default, images will be compressed only in production environment. You can enable compression in other environments as follows:
+
+````ruby
+Paperclip::Tinify.environments = [:development, :production]
+````
+
 ## API Key
 
 Please visit [Tinify](http://tinify.com) to generate your API key.
