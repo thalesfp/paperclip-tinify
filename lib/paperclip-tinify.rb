@@ -25,24 +25,18 @@ module Paperclip
     end
 
     def compress
-      current_extension = File.extname(@file.path)
-      basename = File.basename(@file.path, current_extension)
+      src_path = File.expand_path(@file.path)
 
-      src = @file
-      dst = TempfileFactory.new.generate(basename)
+      if api_key = Tinify.tinify_key
+        Paperclip.log "tinifying #{src_path}"
 
-      if Tinify.tinify_key
-        Paperclip.log "tinifying..."
-
-        ::Tinify.key = Tinify.tinify_key
-        ::Tinify.from_file(File.expand_path(src.path)).to_file(File.expand_path(dst))
-
-        dst
+        ::Tinify.key = api_key
+        ::Tinify.from_file(src_path).to_file(src_path)
       else
         Paperclip.log "tinify key was not defined, skipping..."
-
-        File.open(src.path)
       end
+
+      File.open(src_path)
     end
   end
 end
