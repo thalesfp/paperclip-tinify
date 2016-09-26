@@ -38,5 +38,5 @@ end
 ````
 
 ## License
-paperclip-tinify is released under the [MIT License](https://github.com/emrekutlu/paperclip-compression/blob/master/LICENSE.txt).
+paperclip-tinify is released under the [MIT License](https://github.com/thalesfp/paperclip-tinify/blob/master/LICENSE).
 
