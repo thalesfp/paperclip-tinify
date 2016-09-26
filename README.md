@@ -1,5 +1,7 @@
 # Paperclip Tinify
 
+[![Gem Version](https://badge.fury.io/rb/paperclip-tinify.svg)](https://badge.fury.io/rb/paperclip-tinify)
+
 JPEG and PNG compression processor for Paperclip using [Tinify](http://tinify.com) API.
 
 ## Installation
